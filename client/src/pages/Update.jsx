@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import BackButton from "../components/BackButton";
 import Screen from "../components/Screen";
 
 function Update(props) {
@@ -44,7 +45,7 @@ function Update(props) {
     setWish((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function handleClick(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       var fixedWish = { ...wish };
@@ -63,8 +64,13 @@ function Update(props) {
     }
   }
 
+  function handleBack() {
+    navigate("/wishes");
+  }
+
   return (
     <Screen>
+      <BackButton onClick={handleBack} />
       <div className="AUWrapper">
         <h1 className="AUPageTitle">Update Your Wish</h1>
         <input
@@ -73,6 +79,7 @@ function Update(props) {
           onChange={handleChange}
           name="title"
           value={wish.title}
+          maxLength={45}
           className="AUWishTitle"
         />
         <textarea
@@ -83,9 +90,10 @@ function Update(props) {
           cols="5"
           rows="10"
           value={wish.body}
+          maxLength={500}
           className="AUWishBody"
         />
-        <button onClick={handleClick} className="AUSubmit">
+        <button onClick={handleSubmit} className="AUSubmit">
           Update
         </button>
       </div>

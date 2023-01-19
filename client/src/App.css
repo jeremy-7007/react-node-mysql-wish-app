@@ -4,7 +4,8 @@
   --tertiary: lightblue;
   --grey: #878787;
   --danger: red;
-  --wish: aquamarine;
+  --wish: #90ee90;
+  --background: #cbe4f9;
 }
 
 h1 {
@@ -15,8 +16,28 @@ h3 {
   margin: 0;
 }
 
+h4 {
+  margin: 0;
+}
+
 p {
   margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lightgrey;
+  border-radius: 10px;
 }
 
 .screen {
@@ -33,6 +54,29 @@ p {
   align-self: flex-start;
   margin-left: 20px;
 }
+
+/* Back button */
+
+.backButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  cursor: pointer;
+}
+
+.backIcon {
+  color: var(--grey);
+}
+
+.backText {
+  color: var(--grey);
+  margin-bottom: 2px;
+}
+
+/* ---------------------- */
 
 /* Nav bar */
 
@@ -83,16 +127,75 @@ p {
 /* Wish item */
 
 .wishItemWrapper {
-  width: 80%;
+  width: 100%;
   display: flex;
-  align-items: space-between;
+  justify-content: space-between;
   background-color: var(--wish);
   border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .iconBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 5px;
+}
+
+.wishItemIcon {
+  height: 20px;
   width: 20px;
-  background-color: red;
+  color: var(--grey);
+  margin: 10px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+/* ---------------------- */
+
+/* Wishes screen */
+
+.wishPageWrapper {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px 30px;
+}
+
+.wishPageTitle {
+  color: var(--grey);
+}
+
+.wishContainer {
+  width: 90%;
+  height: 70%;
+  max-height: 70%;
+  background-color: var(--background);
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  padding: 20px 30px;
+  margin: 0;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.wishAddButton {
+  width: 98%;
+  color: white;
+  background-color: var(--primary);
+  font-weight: bold;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
 /* ---------------------- */
@@ -331,20 +434,6 @@ p {
   border: none;
   padding: 15px 20px;
   border-radius: 5px;
-}
-
-/* ---------------------- */
-
-/* Wishes screen */
-
-.wishPageWrapper {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  border-radius: 20px;
-  padding: 20px 30px;
 }
 
 /* ---------------------- */

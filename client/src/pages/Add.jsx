@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import UserContext from "../context";
 import Screen from "../components/Screen";
+import BackButton from "../components/BackButton";
 
 function Add(props) {
   const user = useContext(UserContext);
@@ -19,7 +20,7 @@ function Add(props) {
     setWish((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function handleClick(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       setError("");
@@ -38,8 +39,13 @@ function Add(props) {
     }
   }
 
+  function handleBack() {
+    navigate("/wishes");
+  }
+
   return (
     <Screen>
+      <BackButton onClick={handleBack} />
       <div className="AUWrapper">
         <h1 className="AUPageTitle">Make a New Wish</h1>
         <input
@@ -47,6 +53,7 @@ function Add(props) {
           placeholder="Title"
           onChange={handleChange}
           name="title"
+          maxLength={45}
           className="AUWishTitle"
         />
         <small className="errorText AUError">{error}</small>
@@ -57,9 +64,10 @@ function Add(props) {
           name="body"
           cols="5"
           rows="10"
+          maxLength={500}
           className="AUWishBody"
         />
-        <button onClick={handleClick} className="AUSubmit">
+        <button onClick={handleSubmit} className="AUSubmit">
           Add
         </button>
       </div>

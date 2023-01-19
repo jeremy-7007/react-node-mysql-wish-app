@@ -1,9 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Screen from "../components/Screen";
+import BackButton from "../components/BackButton";
 
 function Register(props) {
+  const navigate = useNavigate();
   const [reg, setReg] = useState({
     name: "",
     email: "",
@@ -52,8 +55,13 @@ function Register(props) {
     }
   }
 
+  function handleBack() {
+    navigate("/login");
+  }
+
   return (
     <Screen>
+      <BackButton onClick={handleBack} />
       <div className="registerWrapper">
         <h1 className="registerTitle">Register new account</h1>
         <input

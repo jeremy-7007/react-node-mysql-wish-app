@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context";
 import axios from "axios";
 import Screen from "../components/Screen";
 import WishItem from "../components/WishItem";
 
 function Wishes(props) {
+  const navigate = useNavigate();
   const user = useContext(UserContext);
   const [wishes, setWishes] = useState([]);
   useEffect(() => {
@@ -36,27 +37,31 @@ function Wishes(props) {
     }
   }
 
+  function handleEdit(id) {
+    navigate(`/update/${id}`);
+  }
+
+  function handleAdd() {
+    navigate("/add");
+  }
+
   return (
     <Screen>
       <div className="wishPageWrapper">
-        <h1>These are your wishes</h1>
-        <WishItem />
-        <div className="wishes">
+        <h1 className="wishPageTitle">Your Wishes</h1>
+        <ul className="wishContainer">
           {wishes.map((wish) => (
-            <div className="wish" key={wish.id}>
-              <h2>{wish.title}</h2>
-              <p>{wish.body}</p>
-              <button className="delete" onClick={() => handleDelete(wish.id)}>
-                Delete
-              </button>
-              <button className="update">
-                <Link to={`/update/${wish.id}`}>Update</Link>
-              </button>
-            </div>
+            <WishItem
+              id={wish.id}
+              title={wish.title}
+              body={wish.body}
+              onEdit={() => handleEdit(wish.id)}
+              onDelete={() => handleDelete(wish.id)}
+            />
           ))}
-        </div>
-        <button>
-          <Link to="/add">Add new wish</Link>
+        </ul>
+        <button className="wishAddButton" onClick={handleAdd}>
+          Add new wish
         </button>
       </div>
     </Screen>

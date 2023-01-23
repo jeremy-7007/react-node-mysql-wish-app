@@ -5,6 +5,7 @@ import UserContext from "../context";
 import axios from "axios";
 import Screen from "../components/Screen";
 import WishItem from "../components/WishItem";
+import WishFinder from "../apis/WishFinder";
 
 function Wishes(props) {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Wishes(props) {
   useEffect(() => {
     const fetchAllWishes = async () => {
       try {
-        const res = await axios.post("http://localhost:8800/api/wishes", {
+        const res = await WishFinder.post("/wishes", {
           userId: user.id,
         });
         setWishes(res.data);
@@ -26,7 +27,7 @@ function Wishes(props) {
 
   async function handleDelete(id) {
     try {
-      await axios.delete("http://localhost:8800/api/wishes/" + id);
+      await WishFinder.delete("/wishes/" + id);
       setWishes(
         wishes.filter((wish) => {
           return wish.id !== id;

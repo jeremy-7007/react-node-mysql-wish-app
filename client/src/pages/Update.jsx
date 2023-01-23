@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import WishFinder from "../apis/WishFinder";
 import BackButton from "../components/BackButton";
 import Screen from "../components/Screen";
 
@@ -23,9 +24,7 @@ function Update(props) {
   useEffect(() => {
     async function getPrevWish() {
       try {
-        const prevWish = await axios.get(
-          "http://localhost:8800/api/wishes/" + wishId
-        );
+        const prevWish = await WishFinder.get("/wishes/" + wishId);
         setOriginalWish({
           title: prevWish.data[0].title,
           body: prevWish.data[0].body,
@@ -57,7 +56,7 @@ function Update(props) {
         fixedWish.body = originalWish.body;
         setWish(fixedWish);
       }
-      await axios.put("http://localhost:8800/api/wishes/" + wishId, fixedWish);
+      await WishFinder.put("/wishes/" + wishId, fixedWish);
       navigate("/wishes");
     } catch (err) {
       console.log(err);

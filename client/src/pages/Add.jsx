@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../context";
 import Screen from "../components/Screen";
 import BackButton from "../components/BackButton";
+import WishFinder from "../apis/WishFinder";
 
 function Add(props) {
   const user = useContext(UserContext);
@@ -29,7 +30,7 @@ function Add(props) {
         throw Error("No title given");
       }
 
-      await axios.post("http://localhost:8800/api/wishes/add", {
+      await WishFinder.post("/wishes/add", {
         ...wish,
         userId: user.id,
       });

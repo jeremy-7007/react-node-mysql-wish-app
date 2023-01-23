@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Screen from "../components/Screen";
 import BackButton from "../components/BackButton";
+import WishFinder from "../apis/WishFinder";
 
 function Register(props) {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function Register(props) {
         throw Error("One or more fields are empty!");
       }
 
-      await axios.post("http://localhost:8800/api/register", reg);
+      await WishFinder.post("/register", reg);
       // Login with given credentials
       await axios.post(
         "http://localhost:8800/auth/local",

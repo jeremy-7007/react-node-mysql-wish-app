@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Screen from "../components/Screen";
 import BackButton from "../components/BackButton";
 import WishFinder from "../apis/WishFinder";
+import AuthFinder from "../apis/AuthFinder";
 
 function Register(props) {
   const navigate = useNavigate();
@@ -36,8 +36,8 @@ function Register(props) {
 
       await WishFinder.post("/register", reg);
       // Login with given credentials
-      await axios.post(
-        "http://localhost:8800/auth/local",
+      await AuthFinder.post(
+        "/local",
         {
           email: reg.email,
           password: reg.password,

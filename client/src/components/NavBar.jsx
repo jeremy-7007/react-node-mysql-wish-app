@@ -6,8 +6,12 @@ import UserContext from "../context";
 function NavBar(props) {
   const user = useContext(UserContext);
 
+  const authUrl =
+    process.env.NODE_ENV === "production"
+      ? "/auth"
+      : "http://localhost:8800/auth";
   function handleLogout() {
-    window.open("http://localhost:8800/auth/logout", "_self");
+    window.open(authUrl + "/logout", "_self");
   }
 
   return (

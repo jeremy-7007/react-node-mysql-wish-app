@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +6,7 @@ import GoogleLogo from "../images/google.jpg";
 import FacebookLogo from "../images/facebook.png";
 
 import Screen from "../components/Screen";
+import AuthFinder from "../apis/AuthFinder";
 
 function Login(props) {
   const navigate = useNavigate();
@@ -19,12 +19,17 @@ function Login(props) {
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
 
+  const authUrl =
+    process.env.NODE_ENV === "production"
+      ? "/auth"
+      : "http://localhost:8800/auth";
+
   function google() {
-    window.open("http://localhost:8800/auth/google", "_self");
+    window.open(authUrl + "/google", "_self");
   }
 
   function facebook() {
-    window.open("http://localhost:8800/auth/facebook", "_self");
+    window.open(authUrl + "/facebook", "_self");
   }
 
   function handleRegister() {
@@ -50,7 +55,7 @@ function Login(props) {
         throw Error("One or more fields are empty!");
       }
 
-      await axios.post("http://localhost:8800/auth/local", auth, {
+      await AuthFinder.post("/local", auth, {
         withCredentials: true,
       });
       window.location.reload();

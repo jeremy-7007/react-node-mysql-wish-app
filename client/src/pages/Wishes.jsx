@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context";
-import axios from "axios";
 import Screen from "../components/Screen";
 import WishItem from "../components/WishItem";
 import WishFinder from "../apis/WishFinder";

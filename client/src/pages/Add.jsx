@@ -29,7 +29,7 @@ function Add(props) {
         throw Error("No title given");
       }
 
-      await axios.post("http://localhost:8800/wishes/add", {
+      await axios.post("http://localhost:8800/api/wishes/add", {
         ...wish,
         userId: user.id,
       });

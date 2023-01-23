@@ -33,7 +33,7 @@ function Register(props) {
         throw Error("One or more fields are empty!");
       }
 
-      await axios.post("http://localhost:8800/register", reg);
+      await axios.post("http://localhost:8800/api/register", reg);
       // Login with given credentials
       await axios.post(
         "http://localhost:8800/auth/local",

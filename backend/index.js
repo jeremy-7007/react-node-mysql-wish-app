@@ -32,7 +32,7 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 
-app.post("/register", (req, res) => {
+app.post("/api/register", (req, res) => {
   const checkEmailQ = "SELECT * FROM users WHERE email = ?";
   const email = req.body.email;
   const name = req.body.name;
@@ -79,11 +79,11 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.json("Hello, this is the backend!");
 });
 
-app.post("/wishes", (req, res) => {
+app.post("/api/wishes", (req, res) => {
   const userId = req.body.userId;
   const q = "SELECT * FROM wishes WHERE userId = ?";
   db.query(q, [userId], (err, data) => {
@@ -92,7 +92,7 @@ app.post("/wishes", (req, res) => {
   });
 });
 
-app.get("/wishes/:id", (req, res) => {
+app.get("/api/wishes/:id", (req, res) => {
   const wishId = req.params.id;
   const q = "SELECT * FROM wishes WHERE id = ?";
 
@@ -102,7 +102,7 @@ app.get("/wishes/:id", (req, res) => {
   });
 });
 
-app.post("/wishes/add", (req, res) => {
+app.post("/api/wishes/add", (req, res) => {
   const q = "INSERT INTO wishes (`title`, `body`, `userId`) VALUES (?)";
   const values = [req.body.title, req.body.body, req.body.userId];
   db.query(q, [values], (err, data) => {
@@ -111,7 +111,7 @@ app.post("/wishes/add", (req, res) => {
   });
 });
 
-app.delete("/wishes/:id", (req, res) => {
+app.delete("/api/wishes/:id", (req, res) => {
   const wishId = req.params.id;
   const q = "DELETE FROM wishes WHERE id = ?";
 
@@ -121,7 +121,7 @@ app.delete("/wishes/:id", (req, res) => {
   });
 });
 
-app.put("/wishes/:id", (req, res) => {
+app.put("/api/wishes/:id", (req, res) => {
   const wishId = req.params.id;
   const q = "UPDATE wishes SET `title` = ?, `body` = ? WHERE id = ?";
   const values = [req.body.title, req.body.body];

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserContext from "../context";
 import axios from "axios";
 import Screen from "../components/Screen";
@@ -13,7 +13,7 @@ function Wishes(props) {
   useEffect(() => {
     const fetchAllWishes = async () => {
       try {
-        const res = await axios.post("http://localhost:8800/wishes", {
+        const res = await axios.post("http://localhost:8800/api/wishes", {
           userId: user.id,
         });
         setWishes(res.data);
@@ -26,7 +26,7 @@ function Wishes(props) {
 
   async function handleDelete(id) {
     try {
-      await axios.delete("http://localhost:8800/wishes/" + id);
+      await axios.delete("http://localhost:8800/api/wishes/" + id);
       setWishes(
         wishes.filter((wish) => {
           return wish.id !== id;

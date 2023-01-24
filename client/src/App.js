@@ -27,7 +27,7 @@ function App() {
       //     "Access-Control-Allow-Credentials": true,
       //   },
       // })
-      AuthFinder.get("http://localhost:8800/auth/user", {
+      AuthFinder.get("/user", {
         withCredentials: true,
       })
         .then((response) => {

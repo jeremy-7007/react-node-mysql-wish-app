@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import axios from "axios";
 
 import "./App.css";
 import NavBar from "./components/NavBar";
@@ -12,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 import UserContext from "./context.js";
+import AuthFinder from "./apis/AuthFinder";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,10 +27,9 @@ function App() {
       //     "Access-Control-Allow-Credentials": true,
       //   },
       // })
-      axios
-        .get("http://localhost:8800/auth/user", {
-          withCredentials: true,
-        })
+      AuthFinder.get("http://localhost:8800/auth/user", {
+        withCredentials: true,
+      })
         .then((response) => {
           if (response.status === 200) return response;
           throw new Error("Authentication has failed");
